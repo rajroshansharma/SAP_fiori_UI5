@@ -1,0 +1,57 @@
+<mvc:View controllerName="session1.demosession1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+    <content>
+        <VBox id="vbox1">
+            <Label text="Welcome to SAP UI5 Fiori Demo session" id="line1"></Label>
+            <HBox id="hbox1">
+                <Button text="Know more" id="km"/>
+                <Button text="Read more" id="rm"/>
+            </HBox>
+        </VBox>
+
+    	<Table id="idProductsTable">
+        <!-- coulmns_header data -->
+        	<columns>
+            <!-- column one' -->
+			<Column width="12em" id="mc1">
+				<Text text="Employee name" id="emp_name" />
+			</Column>
+            <!-- column two' -->
+            <Column width="12em" id="mc2">
+				<Text text="Location" id="loc" />
+			</Column>
+            <!-- column three' -->
+            <Column width="12em" id="mc3">
+				<Text text="Start date" id="s_date" />
+			</Column>
+            </columns>
+
+            <!-- table data -->
+            <items>
+            <!-- Row one -->
+                <ColumnListItem vAlign="Middle" id="cl_data">
+                    <cells>
+                        <Label id="name" text="Raj Roshan"/>
+                        <Label id="name1" text="Banglore"/>
+                        <DatePicker id="date_pick" value=""/>
+                    </cells>
+                </ColumnListItem>
+                <!-- Row two -->
+                <ColumnListItem vAlign="Middle" id="cl_data2">
+                    <cells>
+                        <Label id="name3" text="Raj Roshan"/>
+                        <Label id="name4" text="Banglore"/>
+                        <DatePicker id="date_pick1" value=""/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+     
+    </content>
+   
+
+    </Page>
+</mvc:View>
