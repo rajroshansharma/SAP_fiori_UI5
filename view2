@@ -1,0 +1,121 @@
+<mvc:View controllerName="session1.demosession1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+    
+
+    <content>
+
+    	
+
+        <VBox id="vbox1">
+            <Label text="Welcome to SAP UI5 Fiori Demo session" id="line1"></Label>
+            <HBox id="hbox1">
+                <Button text="Know more" id="km"/>
+                <Button text="Read more" id="rm"/>
+            </HBox>
+        </VBox>
+
+        <IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding">
+        <!-- Tab1 -->
+		<items>
+        <IconTabFilter id="tab1" text="OData Model">
+        <!-- Tab1 content-->
+        <Table id="idProductsTable" items="{NorthwindODataModel>/Customers}">
+        <!-- coulmns_header data -->
+        	<columns>
+            <!-- column one' -->
+			<Column width="12em" id="mc1">
+				<Text text="Employee name" id="cmp_name" />
+			</Column>
+            <!-- column two' -->
+            <Column width="12em" id="mc2">
+				<Text text="Country" id="cnt" />
+			</Column>
+            <!-- column three' -->
+            <Column width="12em" id="mc3">
+				<Text text="Start date" id="s_date" />
+			</Column>
+              <!-- column four' -->
+            <Column width="12em" id="mc4">
+				<Text text="Department" id="dpt" />
+			</Column>
+            </columns>
+
+            <!-- table data -->
+            <items>
+            <!-- Row one -->
+                <ColumnListItem vAlign="Middle" id="cl_data">
+                    <cells>
+                        <Label id="name" text="{NorthwindODataModel>CompanyName}"/>
+                        <Label id="name1" text="{NorthwindODataModel>Country}"/>
+                        <DatePicker id="date_pick" value=""/>
+                        <Label id="dpt1" text="{NorthwindODataModel>ContactTitle}"/>
+                    </cells>
+                </ColumnListItem>
+                
+            </items>
+        </Table>
+        </IconTabFilter>
+        </items>
+        <!-- Tab2 -->
+        <items>
+        <IconTabFilter id="tab2" text="JSON Model">
+        <Button id="bt1" text="Click to load JSON Model" press="onPressLoadJSONModel"></Button>
+        <!-- list -->
+        	<List id="idInvoiceList"
+                  visible="false"
+                  headerText="invoice"
+                  headerLevel="H2"
+                  items="{
+                          path: 'InvoicesJSONModel>/results/'
+                          }" >
+                <StandardListItem id="l11"
+                                  title="{InvoicesJSONModel>ShipName}"/>
+            </List>
+        </IconTabFilter>
+        </items>
+        </IconTabBar>
+
+    	
+     
+    </content>
+   
+
+    </Page>
+</mvc:View>
+
+
+
+
+**************************Controller******************************view1.controller.js
+sap.ui.define([
+    "sap/ui/core/mvc/Controller"
+], function (Controller) {
+    "use strict";
+
+    return Controller.extend("session1.demosession1.controller.View1", {
+        onInit: function () {
+            // Initialization logic here
+        },
+
+        onPressLoadJSONModel: function () {
+            var that = this;
+            that.getView().byId("idInvoiceList").setVisible(true)
+            var oModel = this.getOwnerComponent().getModel("NorthwindODataModel");
+            oModel.read("/Invoices", {
+                success: function (oData) {
+                    debugger;
+                    that.getOwnerComponent().getModel("InvoicesJSONModel").setData(oData);
+                },
+                error: function (oError) {
+                    // Handle error here
+                }
+            });
+        }
+    });
+});
